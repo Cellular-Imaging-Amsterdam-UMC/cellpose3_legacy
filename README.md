@@ -1,7 +1,7 @@
 # cellpose3_legacy
 
 > **This is a renamed legacy fork of the Cellpose CP3 branch intended to coexist
-> with Cellpose 4 / Cellpose-SAM in the same Python environment.**
+> with Cellpose 4 / Cellpose-SAM (and cistardist_pytorch) in the same Python environment.**
 >
 > **To use both Cellpose ≤3 and Cellpose ≥4 side by side:**
 > ```bash
