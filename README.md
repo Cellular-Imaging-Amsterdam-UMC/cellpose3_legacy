@@ -19,6 +19,31 @@
 >
 > Original upstream repository: [MouseLand/cellpose](https://github.com/MouseLand/cellpose)
 
+## Coexistence tests
+
+Two ready-to-run tests are provided in `tests/` that validate all three algorithms
+in a single PyTorch environment:
+
+| Test file | Algorithms |
+|---|---|
+| [`tests/test_coexistence.py`](tests/test_coexistence.py) | cellpose3_legacy (CP3) vs cellpose ≥4 (CP4/SAM) |
+| [`tests/test_coexistence_cp3_cp4_sd.py`](tests/test_coexistence_cp3_cp4_sd.py) | CP3 · CP4/SAM · StarDist 2D — with CPU & GPU timing and label montage |
+
+The three-algorithm test uses the
+[cistardist-pytorch](https://pypi.org/project/cistardist-pytorch/) package
+([GitHub](https://github.com/Cellular-Imaging-Amsterdam-UMC/cistardist_pytorch)),
+a PyTorch-only StarDist 2D implementation that requires no TensorFlow/Keras dependency.
+
+```bash
+pip install cistardist-pytorch
+pytest tests/test_coexistence_cp3_cp4_sd.py -v
+```
+
+The test runs each algorithm on CPU and GPU, prints a timing table, and saves a
+coloured label montage to `tests/output/montage_cp3_cp4_sd.png` (2008×2008 px).
+
+![CP3 · CP4/SAM · StarDist 2D label montage](images/montage_cp3_cp4_sd_2008x2008.png)
+
 ---
 
 # <p>  <b>Cellpose </b> </p>
