@@ -75,10 +75,10 @@ def get_arg_parser():
                             help="use nuclei restore model for second channel")
     model_args.add_argument(
         "--add_model", required=False, default=None, type=str,
-        help="model path to copy model to hidden .cellpose folder for using in GUI/CLI")
+        help="model path to copy model to hidden .cellpose3_legacy folder for using in GUI/CLI")
     model_args.add_argument(
         "--transformer", action="store_true", help=
-        "use transformer backbone (pretrained_model from Cellpose3 is transformer_cp3)")
+        "use transformer backbone (pretrained_model from cellpose3_legacy3 is transformer_cp3)")
     model_args.add_argument("--pretrained_model_ortho", required=False, default=None,
                             type=str,
                             help="model to use for running 3D ortho views (ZY and ZX)")

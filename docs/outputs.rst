@@ -8,7 +8,7 @@ when you run
 
 ::
     
-    from cellpose import io, models
+    from cellpose3_legacy import io, models
     img = io.imread("img.tif")
     masks, flows, styles = models.CellposeModel(model_type='tissuenet_cp3').eval(img, 
                                 diameter=25, channels=[1,2])
@@ -52,7 +52,7 @@ Here is an example of loading in a ``*_seg.npy`` file and plotting masks and out
 ::
 
     import numpy as np
-    from cellpose import plot, utils, io
+    from cellpose3_legacy import plot, utils, io
     dat = np.load('_seg.npy', allow_pickle=True).item()
     img = io.imread('img.tif')
 
@@ -71,7 +71,7 @@ If you run in a notebook and want to save to a `*_seg.npy` file, run
 
 ::
 
-    from cellpose import io
+    from cellpose3_legacy import io
     io.masks_flows_to_seg(images, masks, flows, file_name, channels=channels, diams=diams)
 
 where each of these inputs is a list (as the output of `model.eval` is)
@@ -87,7 +87,7 @@ Or use the function below if running in a notebook
 
 ::
 
-    from cellpose import io
+    from cellpose3_legacy import io
     io.save_masks(images, masks, flows, image_names, png=True)
 
 Native ImageJ ROI archive output
@@ -105,7 +105,7 @@ This function is also available in the GUI.
 
 ::
 
-    from cellpose import io, utils
+    from cellpose3_legacy import io, utils
 
     # image_name is file name of image
     # masks is numpy array of masks for image
@@ -126,7 +126,7 @@ Or use the function below if running in a notebook
 
 ::
 
-    from cellpose import io, utils
+    from cellpose3_legacy import io, utils
 
     # image_name is file name of image 
     # masks is numpy array of masks for image
@@ -151,7 +151,7 @@ In ``plot.py`` there are functions, like ``show_segmentation``:
 
 ::
 
-    from cellpose import plot
+    from cellpose3_legacy import plot
 
     nimg = len(imgs)
     for idx in range(nimg):

@@ -1,11 +1,11 @@
 import os
 import numpy as np
-from cellpose import io, transforms, utils, models, dynamics, metrics, resnet_torch, denoise
+from cellpose3_legacy import io, transforms, utils, models, dynamics, metrics, resnet_torch, denoise
 from natsort import natsorted 
 from pathlib import Path
 from glob import glob
 
-from cellpose.io import logger_setup
+from cellpose3_legacy.io import logger_setup
 
 def prediction_test_hidden(root):
     """ root is path to Hidden folder """
@@ -39,7 +39,7 @@ def prediction_test_hidden(root):
             model = models.CellposeModel(gpu=True, nchan=3, model_type="neurips_cellpose_transformer", backbone="transformer")
             channels = None 
             normalize = False
-            diams = dat["diams_pred"] # (use diams from Cellpose default model for transformer)
+            diams = dat["diams_pred"] # (use diams from cellpose3_legacy default model for transformer)
 
         out = model.eval(imgs_norm, diameter=diams,
                         channels=channels, normalize=normalize, 
@@ -112,7 +112,7 @@ def prediction_tuning(root, root2=None):
             model = models.CellposeModel(gpu=True, nchan=3, model_type="neurips_cellpose_transformer", backbone="transformer")
             channels = None 
             normalize = False
-            diams = dat["diams_pred"] # (use diams from Cellpose default model for transformer)
+            diams = dat["diams_pred"] # (use diams from cellpose3_legacy default model for transformer)
         
         out = model.eval(imgs if mtype=="grayscale" else imgs_norm, diameter=diams,
                         channels=channels, normalize=normalize, 

@@ -14,7 +14,7 @@ hiddenimports += PyInstaller.utils.hooks.collect_submodules("scipy")
 hiddenimports += PyInstaller.utils.hooks.collect_submodules("scipy.ndimage")
 
 a = Analysis(['cli.py'],
-             pathex=['C:\\Users\\carse\\github\\cellpose'],
+             pathex=['C:\\Users\\carse\\github\\cellpose3_legacy'],
              binaries=[],
              datas=[('C:/Users/carse/anaconda3/Lib/site-packages/mxnet/*', './mxnet')],
              hiddenimports=hiddenimports,
@@ -35,7 +35,7 @@ exe = EXE(pyz,
           a.zipfiles,
           a.datas,
           [],
-          name='cellpose',
+          name='cellpose3_legacy',
           debug=False,
           bootloader_ignore_signals=False,
           strip=False,
@@ -43,4 +43,4 @@ exe = EXE(pyz,
           upx_exclude=[],
           runtime_tmpdir=None,
           console=True,
-          icon='cellpose/logo/cellpose.ico')
+          icon='cellpose3_legacy/logo/cellpose.ico')

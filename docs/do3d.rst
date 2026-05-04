@@ -87,7 +87,7 @@ with 3x less sampling in Z than in XY:
 
 ::
 
-    from cellpose import io, denoise, transforms
+    from cellpose3_legacy import io, denoise, transforms
     io.logger_setup()
     img0 = io.imread("volume.tif")
     anisotropy = 3

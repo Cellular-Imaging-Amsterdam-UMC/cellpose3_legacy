@@ -21,8 +21,8 @@ from .resnet_torch import CPnet
 from .core import assign_device, check_mkl, run_net, run_3D
 
 _MODEL_URL = "https://www.cellpose.org/models"
-_MODEL_DIR_ENV = os.environ.get("CELLPOSE_LOCAL_MODELS_PATH")
-_MODEL_DIR_DEFAULT = pathlib.Path.home().joinpath(".cellpose", "models")
+_MODEL_DIR_ENV = os.environ.get("CELLPOSE3_LEGACY_LOCAL_MODELS_PATH")
+_MODEL_DIR_DEFAULT = pathlib.Path.home().joinpath(".cellpose3_legacy", "models")
 MODEL_DIR = pathlib.Path(_MODEL_DIR_ENV) if _MODEL_DIR_ENV else _MODEL_DIR_DEFAULT
 
 MODEL_NAMES = [
@@ -222,13 +222,13 @@ def get_model_params(pretrained_model, model_type, pretrained_model_ortho, defau
     all_models = MODEL_NAMES.copy()
     all_models.extend(model_strings)
     
-    # check if pretrained_model is builtin or custom user model saved in .cellpose/models
+    # check if pretrained_model is builtin or custom user model saved in .cellpose3_legacy/models
     # if yes, then set to model_type
     if (pretrained_model and not Path(pretrained_model).exists() and
             np.any([pretrained_model == s for s in all_models])):
         model_type = pretrained_model
         
-    # check if model_type is builtin or custom user model saved in .cellpose/models
+    # check if model_type is builtin or custom user model saved in .cellpose3_legacy/models
     if model_type is not None and np.any([model_type == s for s in all_models]):
         if np.any([model_type == s for s in MODEL_NAMES]):
             builtin = True

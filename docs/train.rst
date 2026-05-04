@@ -41,7 +41,7 @@ If you use the --img_filter option (``--img_filter _img`` in this case):
     The path given to ``--dir`` and ``--test_dir`` should be an absolute path.
 
   
-To train on cytoplasmic images (green cyto and red nuclei) starting with a pretrained model from cellpose (one of the model zoo models), 
+To train on cytoplasmic images (green cyto and red nuclei) starting with a pretrained model from cellpose3_legacy (one of the model zoo models), 
 we also have included the recommended training parameters in the command below:
 
 ::
@@ -69,7 +69,7 @@ You can also specify the full path to a pretrained model to use:
 
 In a notebook, you can train with the `train_seg` function:
 ::
-    from cellpose import io, models, train
+    from cellpose3_legacy import io, models, train
     io.logger_setup()
     
     output = io.load_train_test_data(train_dir, test_dir, image_filter="_img",
@@ -134,7 +134,7 @@ When re-training, keep in mind that the normalization happens per image that you
 These crops may look different after normalization than the full images. To approximate per-crop normalization on the full images, we have the option for 
 tile normalization that can be set in ``model.eval``: ``normalize={"tile_norm_blocksize": 128}``. Alternatively/additionally, you may want to change 
 the overall normalization scaling on the full images, e.g. ``normalize={"percentile": [3, 98]``. You can visualize how the normalization looks in 
-a notebook for example with ``from cellpose import transforms; plt.imshow(transforms.normalize99(img, lower=3, upper=98))``. The default 
+a notebook for example with ``from cellpose3_legacy import transforms; plt.imshow(transforms.normalize99(img, lower=3, upper=98))``. The default 
 that will be used for training on the image crops is ``[1, 99]``. 
 
 See :ref:`do3d` for info on training on 3D data.

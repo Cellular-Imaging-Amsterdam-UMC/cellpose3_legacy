@@ -7,8 +7,8 @@ See :ref:`Settings` for more information on run settings.
 
     import numpy as np
     import matplotlib.pyplot as plt
-    from cellpose import models, io
-    from cellpose.io import imread 
+    from cellpose3_legacy import models, io
+    from cellpose3_legacy.io import imread 
 
     io.logger_setup()
 

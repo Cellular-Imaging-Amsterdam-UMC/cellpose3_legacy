@@ -1,3 +1,26 @@
+# cellpose3_legacy
+
+> **This is a renamed legacy fork of the Cellpose CP3 branch intended to coexist
+> with Cellpose 4 / Cellpose-SAM in the same Python environment.**
+>
+> **To use both Cellpose ≤3 and Cellpose ≥4 side by side:**
+> ```bash
+> pip install cellpose          # installs cellpose 4 / cellpose-SAM
+> pip install -e ./cellpose3_legacy   # installs this legacy fork
+> ```
+>
+> Use:
+> ```python
+> import cellpose               # cellpose 4 / SAM
+> import cellpose3_legacy       # cellpose 3 (this fork)
+> # or
+> from cellpose3_legacy import models, io
+> ```
+>
+> Original upstream repository: [MouseLand/cellpose](https://github.com/MouseLand/cellpose)
+
+---
+
 # <p>  <b>Cellpose </b> </p>
 <img src="http://www.cellpose.org/static/images/logo.png?raw=True" width="250" title="cellpose" alt="cellpose" align="right" vspace = "50">
 
@@ -177,7 +200,7 @@ You can quickly try out Cellpose on the [website](https://www.cellpose.org) firs
 * The [*Mac OS*](https://www.cellpose.org/mac) file will download as `cellpose_mac` OR `cellpose_mac.dms`. You will need to make it into an executable file and run it through the terminal:
 1. Open a terminal and run `cd ~/Downloads/`.
 2. Run `chmod 777 cellpose_mac` OR `chmod 777 cellpose_mac.dms` to make the file executable.
-3. Run `./cellpose_mac` OR `./cellpose_mac.dms` to open the cellpose GUI. Messages from cellpose will be printed in the terminal.
+3. Run `./cellpose_mac` OR `./cellpose_mac.dms` to open the cellpose GUI. Messages from cellpose3_legacy will be printed in the terminal.
 4. You can also run using the command line interface, e.g. as `./cellpose_mac --dir ~/Pictures/ --chan 2 --save_png`.
 
 * The [*Windows 10*](https://www.cellpose.org/windows) file is an exe and you can click on it to run the GUI. You can also run using the command line interface, e.g. as `cellpose.exe --dir Pictures/ --chan 2 --save_png`

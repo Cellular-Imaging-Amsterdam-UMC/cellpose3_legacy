@@ -29,7 +29,7 @@ Initialize a DenoiseModel with the model_type:
 
 :: 
 
-    from cellpose import denoise
+    from cellpose3_legacy import denoise
     dn = denoise.DenoiseModel(model_type="denoise_cyto3", gpu=True)
 
 Now you can apply this denoising model to specified channels in your images, 
@@ -46,7 +46,7 @@ the nuclei restoration models on the second channel, with ``chan2=True``:
 
 :: 
 
-    from cellpose import denoise
+    from cellpose3_legacy import denoise
     dn = denoise.DenoiseModel(model_type="denoise_cyto3", gpu=True, chan2=True)
     imgs_dn = dn.eval(imgs, channels=[1,2], diameter=50.)
 
@@ -57,7 +57,7 @@ function call, and then the model will upsample the image to 30 or 17:
 
 :: 
 
-    from cellpose import denoise
+    from cellpose3_legacy import denoise
     dn = denoise.DenoiseModel(model_type="upsample_cyto3", gpu=True, chan2=True)
     imgs_up = dn.eval(imgs, channels=[1,2], diameter=10.)
 
@@ -71,7 +71,7 @@ ensure the channels and diameters are handled properly. See example:
 
 ::
     
-    from cellpose import denoise
+    from cellpose3_legacy import denoise
     model = denoise.CellposeDenoiseModel(gpu=True, model_type="cyto3",
                  restore_type="denoise_cyto3", chan2_restore=True)
     masks, flows, styles, imgs_dn = model.eval(imgs, channels=[1,2], diameter=50.)             
@@ -98,7 +98,7 @@ model with the cyto2 segmentation model with train_data and train_labels
 
 ::
 
-    from cellpose import denoise
+    from cellpose3_legacy import denoise
     model = denoise.DenoiseModel(gpu=True, nchan=1)
 
     io.logger_setup()

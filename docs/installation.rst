@@ -21,7 +21,7 @@ To set the environment variable in the command line/Anaconda prompt on windows r
 linux, run ``export CELLPOSE_LOCAL_MODELS_PATH=/PATH_FOR_MODELS/``.
 
 To set this environment variable when running cellpose in a jupyter notebook, run 
-this code at the beginning of your notebook before you import cellpose:
+this code at the beginning of your notebook before you import cellpose3_legacy:
 
 ::
    

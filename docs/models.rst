@@ -1,7 +1,7 @@
 Models
 -------------------------------
 
-``from cellpose import models``
+``from cellpose3_legacy import models``
 
 Each model will be downloaded automatically to your ``models.MODELS_DIR`` (see
 Installation instructions for more details on MODELS_DIR). You can also directly

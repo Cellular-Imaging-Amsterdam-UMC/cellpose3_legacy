@@ -47,7 +47,7 @@ except:
 
 io_logger = logging.getLogger(__name__)
 
-def logger_setup(cp_path=".cellpose", logfile_name="run.log", stdout_file_replacement=None):
+def logger_setup(cp_path=".cellpose3_legacy", logfile_name="run.log", stdout_file_replacement=None):
     cp_dir = pathlib.Path.home().joinpath(cp_path)
     cp_dir.mkdir(exist_ok=True)
     log_file = cp_dir.joinpath(logfile_name)
@@ -481,8 +481,8 @@ def masks_flows_to_seg(images, masks, flows, file_names, diams=30., channels=Non
 
     Args:
         images (list): Images input into cellpose.
-        masks (list): Masks output from Cellpose.eval, where 0=NO masks; 1,2,...=mask labels.
-        flows (list): Flows output from Cellpose.eval.
+        masks (list): Masks output from cellpose3_legacy.eval, where 0=NO masks; 1,2,...=mask labels.
+        flows (list): Flows output from cellpose3_legacy.eval.
         file_names (list, str): Names of files of images.
         diams (float array): Diameters used to run Cellpose. Defaults to 30.
         channels (list, int, optional): Channels used to run Cellpose. Defaults to None.
@@ -582,7 +582,7 @@ def save_rois(masks, file_name, multiprocessing=None):
     """ save masks to .roi files in .zip archive for ImageJ/Fiji
 
     Args:
-        masks (np.ndarray): masks output from Cellpose.eval, where 0=NO masks; 1,2,...=mask labels
+        masks (np.ndarray): masks output from cellpose3_legacy.eval, where 0=NO masks; 1,2,...=mask labels
         file_name (str): name to save the .zip file to
 
     Returns:
@@ -621,14 +621,14 @@ def save_masks(images, masks, flows, file_names, png=True, tif=False, channels=[
 
     Args:
         images (list): Images input into cellpose.
-        masks (list): Masks output from Cellpose.eval, where 0=NO masks; 1,2,...=mask labels.
-        flows (list): Flows output from Cellpose.eval.
+        masks (list): Masks output from cellpose3_legacy.eval, where 0=NO masks; 1,2,...=mask labels.
+        flows (list): Flows output from cellpose3_legacy.eval.
         file_names (list, str): Names of files of images.
         png (bool, optional): Save masks to PNG. Defaults to True.
         tif (bool, optional): Save masks to TIF. Defaults to False.
         channels (list, int, optional): Channels used to run Cellpose. Defaults to [0,0].
         suffix (str, optional): Add name to saved masks. Defaults to "_cp_masks".
-        save_flows (bool, optional): Save flows output from Cellpose.eval. Defaults to False.
+        save_flows (bool, optional): Save flows output from cellpose3_legacy.eval. Defaults to False.
         save_outlines (bool, optional): Save outlines of masks. Defaults to False.
         dir_above (bool, optional): Save masks/flows in directory above. Defaults to False.
         in_folders (bool, optional): Save masks/flows in separate folders. Defaults to False.

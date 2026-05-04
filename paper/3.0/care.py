@@ -7,7 +7,7 @@ from tqdm import trange
 import matplotlib.pyplot as plt
 from pathlib import Path
 import torch
-from cellpose import models, metrics, io, transforms, denoise
+from cellpose3_legacy import models, metrics, io, transforms, denoise
 
 # uses tensorflow
 # pip install csbdeep

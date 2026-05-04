@@ -1,8 +1,8 @@
 import numpy as np
 import pytest
 
-from cellpose.io import imread
-from cellpose.transforms import normalize_img, random_rotate_and_resize, resize_image
+from cellpose3_legacy.io import imread
+from cellpose3_legacy.transforms import normalize_img, random_rotate_and_resize, resize_image
 
 
 @pytest.fixture

@@ -6,8 +6,8 @@ import numpy as np
 from tqdm import trange
 import matplotlib.pyplot as plt
 from pathlib import Path
-from cellpose import transforms, io, metrics
-from cellpose.models import CellposeModel
+from cellpose3_legacy import transforms, io, metrics
+from cellpose3_legacy.models import cellpose3_legacyModel
 
 # uses torch
 import torch

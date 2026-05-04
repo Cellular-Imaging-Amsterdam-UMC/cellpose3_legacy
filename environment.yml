@@ -1,4 +1,4 @@
-name: cellpose
+name: cellpose3_legacy
 dependencies:
   - python==3.8.5
   - pip
@@ -16,7 +16,7 @@ dependencies:
     - tqdm
     - tifffile
     - fastremap
-    - cellpose
+    - cellpose3_legacy
     - roifile
     - pyqt5
     - dask

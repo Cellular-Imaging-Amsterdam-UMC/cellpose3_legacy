@@ -13,7 +13,7 @@ Using ``openvino_utils.to_openvino``, convert PyTorch model to OpenVINO one:
 
 ::
 
-    from cellpose.contrib import openvino_utils
+    from cellpose3_legacy.contrib import openvino_utils
 
     model = models.CellposeModel(...)
 

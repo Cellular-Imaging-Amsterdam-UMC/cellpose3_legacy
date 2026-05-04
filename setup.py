@@ -83,11 +83,11 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name="cellpose", license="BSD", author="Marius Pachitariu and Carsen Stringer",
+    name="cellpose3_legacy", license="BSD", author="Marius Pachitariu and Carsen Stringer",
     author_email="stringerc@janelia.hhmi.org",
-    description="anatomical segmentation algorithm", long_description=long_description,
+    description="Cellpose 3 legacy fork (cellpose <4) for coexistence with cellpose >=4", long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/MouseLand/cellpose", setup_requires=[
+    url="https://github.com/Cellular-Imaging-Amsterdam-UMC/cellpose3_legacy", setup_requires=[
         'pytest-runner',
         'setuptools_scm',
     ], packages=setuptools.find_packages(), use_scm_version=True,
@@ -101,4 +101,4 @@ setup(
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: BSD License",
         "Operating System :: OS Independent",
-    ), entry_points={'console_scripts': ['cellpose = cellpose.__main__:main']})
+    ), entry_points={'console_scripts': ['cellpose3_legacy = cellpose3_legacy.__main__:main']})

@@ -54,8 +54,8 @@ def show_segmentation(fig, img, maski, flowi, channels=[0, 0], file_name=None):
     Args:
         fig (matplotlib.pyplot.figure): Figure in which to make plot.
         img (ndarray): 2D or 3D array. Image input into cellpose.
-        maski (int, ndarray): For image k, masks[k] output from Cellpose.eval, where 0=NO masks; 1,2,...=mask labels.
-        flowi (int, ndarray): For image k, flows[k][0] output from Cellpose.eval (RGB of flows).
+        maski (int, ndarray): For image k, masks[k] output from cellpose3_legacy.eval, where 0=NO masks; 1,2,...=mask labels.
+        flowi (int, ndarray): For image k, flows[k][0] output from cellpose3_legacy.eval (RGB of flows).
         channels (list of int, optional): Channels used to run Cellpose, no need to use if image is RGB. Defaults to [0, 0].
         file_name (str, optional): File name of image. If file_name is not None, figure panels are saved. Defaults to None.
         seg_norm (bool, optional): Improve cell visibility under labels. Defaults to False.

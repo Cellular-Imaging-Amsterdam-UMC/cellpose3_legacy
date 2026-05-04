@@ -11,8 +11,8 @@ running a list of images for reference:
 
 ::
 
-    from cellpose import models
-    from cellpose.io import imread
+    from cellpose3_legacy import models
+    from cellpose3_legacy.io import imread
 
     # model_type='cyto' or model_type='nuclei'
     model = models.Cellpose(gpu=False, model_type='cyto')

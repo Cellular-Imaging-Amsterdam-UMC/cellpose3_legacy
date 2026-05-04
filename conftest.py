@@ -1,6 +1,6 @@
 import pytest
 import os, sys, shutil
-from cellpose import utils
+from cellpose3_legacy import utils
 import zipfile
 
 from pathlib import Path
@@ -20,7 +20,7 @@ def extract_zip(cached_file, url, data_path):
 
 @pytest.fixture()
 def data_dir(image_names):
-    cp_dir = Path.home().joinpath(".cellpose")
+    cp_dir = Path.home().joinpath(".cellpose3_legacy")
     cp_dir.mkdir(exist_ok=True)
     extract_zip(cp_dir.joinpath("data.zip"), "https://osf.io/download/67f022eb033d25194f82a4ee/", cp_dir)
     data_dir = cp_dir.joinpath("data")

@@ -158,7 +158,7 @@ def _initialize_images(parent, image, load_3D=False):
     if image.ndim == 4:
         if not load_3D:
             raise ValueError(
-                "cannot load 3D stack, run 'python -m cellpose --Zstack' for 3D GUI")
+                "cannot load 3D stack, run 'python -m cellpose3_legacy --Zstack' for 3D GUI")
         else:
             # check if tiff is channels first
             if image.shape[0] < 4 and image.shape[0] == min(image.shape) and image.shape[0] < image.shape[1]:
@@ -182,7 +182,7 @@ def _initialize_images(parent, image, load_3D=False):
             image = image[..., np.newaxis]
         else:
             raise ValueError(
-                "cannot load 2D stack in 3D mode, run 'python -m cellpose' for 2D GUI")
+                "cannot load 2D stack in 3D mode, run 'python -m cellpose3_legacy' for 2D GUI")
     if image.shape[-1] > 3:
         print("WARNING: image has more than 3 channels, keeping only first 3")
         image = image[..., :3]

@@ -149,10 +149,10 @@ def run(image=None):
     # Always start by initializing Qt (only once per application)
     warnings.filterwarnings("ignore")
     app = QApplication(sys.argv)
-    icon_path = pathlib.Path.home().joinpath(".cellpose", "logo.png")
-    guip_path = pathlib.Path.home().joinpath(".cellpose", "cellpose_gui.png")
+    icon_path = pathlib.Path.home().joinpath(".cellpose3_legacy", "logo.png")
+    guip_path = pathlib.Path.home().joinpath(".cellpose3_legacy", "cellpose_gui.png")
     if not icon_path.is_file():
-        cp_dir = pathlib.Path.home().joinpath(".cellpose")
+        cp_dir = pathlib.Path.home().joinpath(".cellpose3_legacy")
         cp_dir.mkdir(exist_ok=True)
         print("downloading logo")
         download_url_to_file(
@@ -189,10 +189,10 @@ class MainW(QMainWindow):
         self.logger = logger
         pg.setConfigOptions(imageAxisOrder="row-major")
         self.setGeometry(50, 50, 1200, 1000)
-        self.setWindowTitle(f"cellpose v{version}")
+        self.setWindowTitle(f"cellpose3_legacy v{version}")
         self.cp_path = os.path.dirname(os.path.realpath(__file__))
         app_icon = QtGui.QIcon()
-        icon_path = pathlib.Path.home().joinpath(".cellpose", "logo.png")
+        icon_path = pathlib.Path.home().joinpath(".cellpose3_legacy", "logo.png")
         icon_path = str(icon_path.resolve())
         app_icon.addFile(icon_path, QtCore.QSize(16, 16))
         app_icon.addFile(icon_path, QtCore.QSize(24, 24))
@@ -710,7 +710,7 @@ class MainW(QMainWindow):
             "nuclei", "cellpose (cyto2_cp3)", "tissuenet_cp3", "livecell_cp3",
             "yeast_PhC_cp3", "yeast_BF_cp3", "bact_phase_cp3", "bact_fluor_cp3",
             "deepbacs_cp3", "cyto", "cyto2",
-            "CPx (from Cellpose2)"
+            "CPx (from cellpose3_legacy2)"
         ]
         b0 += 1
         self.ModelChooseB = QComboBox()
@@ -1892,7 +1892,7 @@ class MainW(QMainWindow):
                     self.DenoiseButtons[i].setStyleSheet(self.styleUnpressed)
 
     def set_normalize_params(self, normalize_params):
-        from cellpose.models import normalize_default
+        from cellpose3_legacy.models import normalize_default
         if self.restore != "filter":
             keys = list(normalize_params.keys()).copy()
             for key in keys:
@@ -1968,7 +1968,7 @@ class MainW(QMainWindow):
             normalize_params["tile_norm_smooth3D"] = smooth3D
             normalize_params["invert"] = invert
 
-        from cellpose.models import normalize_default
+        from cellpose3_legacy.models import normalize_default
         normalize_params = {**normalize_default, **normalize_params}
 
         return normalize_params
@@ -2157,7 +2157,7 @@ class MainW(QMainWindow):
             print("GUI_INFO: training cancelled")
 
     def train_model(self, restore=None, normalize_params=None):
-        from cellpose.models import normalize_default
+        from cellpose3_legacy.models import normalize_default
         if normalize_params is None:
             normalize_params = copy.deepcopy(normalize_default)
         if self.training_params["model_index"] < len(models.MODEL_NAMES):

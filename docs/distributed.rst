@@ -41,7 +41,7 @@ You can access these docstrings like this:
 
 .. code-block:: python
 
-    from cellpose.contrib.distributed_segmentation import distributed_eval
+    from cellpose3_legacy.contrib.distributed_segmentation import distributed_eval
     distributed_eval?
 
 Examples
@@ -52,7 +52,7 @@ and 128GB system memory:
 
 .. code-block:: python
 
-   from cellpose.contrib.distributed_segmentation import distributed_eval
+   from cellpose3_legacy.contrib.distributed_segmentation import distributed_eval
 
     # parameterize cellpose however you like
     model_kwargs = {'gpu':True, 'model_type':'cyto3'}  # can also use 'pretrained_model'
@@ -88,7 +88,7 @@ Test run a single block before distributing the whole dataset (always a good ide
 
 .. code-block:: python
 
-    from cellpose.contrib.distributed_segmentation import process_block
+    from cellpose3_legacy.contrib.distributed_segmentation import process_block
 
     # parameterize cellpose however you like
     model_kwargs = {'gpu':True, 'model_type':'cyto3'}
@@ -124,7 +124,7 @@ Convert a single large (but still smaller than system memory) tiff image to a za
 
     # Note full image will be loaded in system memory
     import tifffile
-    from cellpose.contrib.distributed_segmentation import numpy_array_to_zarr
+    from cellpose3_legacy.contrib.distributed_segmentation import numpy_array_to_zarr
 
     data_numpy = tifffile.imread('/path/to/image.tiff')
     data_zarr = numpy_array_to_zarr('/path/to/output.zarr', data_numpy, chunks=(256, 256, 256))
@@ -136,7 +136,7 @@ Wrap a folder of tiff images/tiles into a single zarr array without duplicating 
 .. code-block:: python
 
     # Note tiff filenames must indicate the position of each file in the overall tile grid
-    from cellpose.contrib.distributed_segmentation import wrap_folder_of_tiffs
+    from cellpose3_legacy.contrib.distributed_segmentation import wrap_folder_of_tiffs
 
     reconstructed_virtual_zarr_array = wrap_folder_of_tiffs(
         filname_pattern='/path/to/folder/of/*.tiff',
@@ -148,7 +148,7 @@ Run distributed Cellpose on an LSF cluster with 128 GPUs (e.g. Janelia cluster):
 
 .. code-block:: python
 
-    from cellpose.contrib.distributed_segmentation import distributed_eval
+    from cellpose3_legacy.contrib.distributed_segmentation import distributed_eval
     
     # parameterize cellpose however you like
     model_kwargs = {'gpu':True, 'model_type':'cyto3'}
@@ -186,7 +186,7 @@ Use preprocessing_steps and a mask:
 .. code-block:: python
 
    from scipy.ndimage import gaussian_filter
-   from cellpose.contrib.distributed_segmentation import distributed_eval
+   from cellpose3_legacy.contrib.distributed_segmentation import distributed_eval
 
     # parameterize cellpose however you like
     model_kwargs = {'gpu':True, 'model_type':'cyto3'}  # can also use 'pretrained_model'
@@ -238,7 +238,7 @@ Multi-channel segmentation using preprocessing_steps:
 
 .. code-block:: python
 
-   from cellpose.contrib.distributed_segmentation import distributed_eval
+   from cellpose3_legacy.contrib.distributed_segmentation import distributed_eval
 
     # parameterize cellpose however you like
     model_kwargs = {'gpu':True, 'model_type':'cyto3'}  # can also use 'pretrained_model'

@@ -6,11 +6,11 @@ import sys, os, glob, pathlib, time
 import numpy as np
 from natsort import natsorted
 from tqdm import tqdm
-from cellpose import utils, models, io, version_str, train, denoise
-from cellpose.cli import get_arg_parser
+from cellpose3_legacy import utils, models, io, version_str, train, denoise
+from cellpose3_legacy.cli import get_arg_parser
 
 try:
-    from cellpose.gui import gui3d, gui
+    from cellpose3_legacy.gui import gui3d, gui
     GUI_ENABLED = True
 except ImportError as err:
     GUI_ERROR = err
@@ -52,7 +52,7 @@ def main():
                     print(
                         "GUI FAILED: GUI dependencies may not be installed, to install, run"
                     )
-                    print("     pip install 'cellpose[gui]'")
+                    print("     pip install 'cellpose3_legacy[gui]'")
             else:
                 if args.Zstack:
                     gui3d.run()
