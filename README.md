@@ -5,8 +5,9 @@
 >
 > **To use both Cellpose ≤3 and Cellpose ≥4 side by side:**
 > ```bash
-> pip install cellpose          # installs cellpose 4 / cellpose-SAM
-> pip install -e ./cellpose3_legacy   # installs this legacy fork
+> pip install cellpose                  # installs cellpose 4 / cellpose-SAM
+> pip install -e ./cellpose3_legacy     # installs this legacy fork (without gui)
+>   or pip install -e . when you are inside this repo's root
 > ```
 >
 > Use:
