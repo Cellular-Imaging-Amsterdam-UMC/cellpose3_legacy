@@ -44,6 +44,14 @@ coloured label montage to `tests/output/montage_cp3_cp4_sd.png` (2008×2008 px).
 
 ![CP3 · CP4/SAM · StarDist 2D label montage](images/montage_cp3_cp4_sd_2008x2008.png)
 
+```
+Algorithm             Model                      Cells   CPU (s)   GPU (s)
+----------------------------------------------------------------------------
+cellpose3_legacy      nuclei  (CP3)               1100     25.54      4.85
+cellpose ≥4           cpsam  (CP4/SAM)            1137    257.88      5.35
+StarDist 2D           SD_Nuclei_Versatile         1118      2.53      1.68
+```
+
 ---
 
 # <p>  <b>Cellpose </b> </p>
