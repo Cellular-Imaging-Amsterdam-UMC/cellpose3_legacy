@@ -3,18 +3,18 @@ from setuptools import setup
 
 install_deps = [
     'numpy>=1.20.0,<2.1',
-    'scipy',
-    'natsort',
-    'tifffile',
-    'tqdm',
-    'numba>=0.53.0',
-    'llvmlite',
-    'torch>=1.6',
-    'opencv-python-headless',
-    'fastremap',
-    'imagecodecs',
-    'roifile',
-    'fill-voids',
+    'scipy>=1.17.1',
+    'natsort>=8.4.0',
+    'tifffile>=2026.3.3',
+    'tqdm>=4.67.3',
+    'numba>=0.65.1',
+    'llvmlite>=0.47.0',
+    'torch>=2.11.0',
+    'opencv-python-headless>=4.13.0.92',
+    'fastremap>=1.19.0',
+    'imagecodecs>=2026.3.6',
+    'roifile>=2026.2.10',
+    'fill-voids>=2.1.2',
 ]
 
 try:
@@ -24,7 +24,7 @@ try:
     ver = version("torch")
     major_version, minor_version, _ = ver.split(".")
     if major_version == "2" or int(minor_version) >= 6:
-        install_deps.remove("torch>=1.6")
+        install_deps.remove("torch>=2.11.0")
 except:
     pass
 
