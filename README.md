@@ -69,12 +69,14 @@ from cellpose3_legacy import models, io
 
 ## Coexistence tests
 
-Two ready-to-run tests in `tests/` validate all three algorithms in a single PyTorch environment:
+Ready-to-run tests in `tests/` validate CP3, CP4/SAM, and StarDist in a single PyTorch environment:
 
 | Test file | Algorithms |
 |---|---|
 | [`tests/test_coexistence.py`](tests/test_coexistence.py) | cellpose3_legacy (CP3) vs cellpose >=4 (CP4/SAM) |
-| [`tests/test_coexistence_cp3_cp4_sd.py`](tests/test_coexistence_cp3_cp4_sd.py) | CP3 · CP4/SAM · StarDist 2D — with CPU & GPU timing and label montage |
+| [`tests/test_coexistence_cp3_sd.py`](tests/test_coexistence_cp3_sd.py) | CP3 · CP3 fast mode · StarDist 2D — no CP4 import |
+| [`tests/test_coexistence_cp3_cp4_sd.py`](tests/test_coexistence_cp3_cp4_sd.py) | CP3 · CP3 fast mode · CP4/SAM · StarDist 2D — with CPU & GPU timing and label montage |
+| [`tests/profile_cp3_stardist_speed.py`](tests/profile_cp3_stardist_speed.py) | Stage-by-stage CP3/StarDist profiling plus CP3-fast-vs-default object metrics |
 
 The three-algorithm test uses [cistardist-pytorch](https://pypi.org/project/cistardist-pytorch/)
 ([GitHub](https://github.com/Cellular-Imaging-Amsterdam-UMC/cistardist_pytorch)),
@@ -82,6 +84,7 @@ a PyTorch-only StarDist 2D implementation with no TensorFlow/Keras dependency.
 
 ```bash
 pip install cistardist-pytorch
+pytest tests/test_coexistence_cp3_sd.py -v
 pytest tests/test_coexistence_cp3_cp4_sd.py -v
 ```
 
@@ -96,6 +99,70 @@ Algorithm             Model                      Cells   CPU (s)   GPU (s)
 cellpose3_legacy      nuclei  (CP3)               1100     25.54      4.85
 cellpose >=4          cpsam  (CP4/SAM)            1137    257.88      5.35
 StarDist 2D           SD_Nuclei_Versatile         1118      2.53      1.68
+```
+
+---
+
+## CP3 fast mode
+
+`CellposeModel.eval(..., fast_mode=True)` enables a tuned 2D inference preset
+for CP3 nuclei-style segmentation. It is designed to be nearly identical to the
+default CP3 output while avoiding the slowest full-resolution dynamics path.
+
+Current fast-mode defaults:
+
+```python
+from cellpose3_legacy import models
+
+model = models.CellposeModel(gpu=True, pretrained_model="nuclei")
+masks, flows, styles = model.eval(
+    image,
+    channels=[0, 0],
+    fast_mode=True,
+    fast_diameter=17.0,      # optional; useful for nuclei benchmark images
+)
+```
+
+Fast mode uses the same built-in CP3 nuclei model as default CP3 inference:
+
+```python
+model = models.CellposeModel(gpu=True, pretrained_model="nuclei")
+```
+
+Internally this uses:
+
+| Setting | Fast-mode value |
+|---|---:|
+| `resample` | `False` |
+| `fast_niter` / `niter` | `100` |
+| `fast_interp` / `interp` | `True` |
+| `fast_flow_threshold` / `flow_threshold` | `0.4` |
+
+For maximum speed with less default-like output, pass `fast_flow_threshold=0`
+to skip the flow-QC pass.
+
+On `tests/data/nuclei_large.tif` with an NVIDIA RTX A5000 in the `sdcpsam`
+environment, CP3 and CP3 fast both use the built-in `nuclei` model
+(`pretrained_model="nuclei"`):
+
+```text
+Algorithm             Model                      Cells   GPU (s)
+----------------------------------------------------------------
+cellpose3_legacy      nuclei  (CP3)               1100      4.45
+cellpose3_fast        nuclei  (CP3 fast n100)     1099      2.69
+StarDist 2D           SD_Nuclei_Versatile         1118      1.67
+```
+
+The profiler compares CP3 fast mode to CP3 default by matched-object overlap:
+
+```text
+CP3 fast n100    count=1099/1100  F1=0.9995  P=1.0000  R=0.9991  mIoU=0.9997
+```
+
+Run the profiler:
+
+```bash
+python tests/profile_cp3_stardist_speed.py --gpu_only
 ```
 
 ---

@@ -381,7 +381,9 @@ class CellposeModel():
              flow3D_smooth=0, stitch_threshold=0.0, 
              min_size=15, max_size_fraction=0.4, niter=None, 
              augment=False, tile_overlap=0.1, bsize=224, 
-             interp=True, compute_masks=True, progress=None):
+             interp=True, compute_masks=True, progress=None,
+             fast_mode=False, fast_diameter=None, fast_niter=100,
+             fast_interp=True, fast_flow_threshold=0.4):
         """ segment list of images x, or 4D array - Z x nchan x Y x X
 
         Args:
@@ -430,6 +432,18 @@ class CellposeModel():
             interp (bool, optional): interpolate during 2D dynamics (not available in 3D) . Defaults to True.
             compute_masks (bool, optional): Whether or not to compute dynamics and return masks. This is set to False when retrieving the styles for the size model. Defaults to True.
             progress (QProgressBar, optional): pyqt progress bar. Defaults to None.
+            fast_mode (bool, optional): Apply a reversible speed preset for 2D inference:
+                fixed diameter, resample=False, lower niter, and the CUDA
+                interpolation path. Defaults to False.
+            fast_diameter (float, optional): Diameter used by fast_mode when no
+                diameter or rescale is provided. Defaults to the model mean diameter.
+            fast_niter (int, optional): Dynamics iterations used by fast_mode when
+                niter is None or 0. Defaults to 100.
+            fast_interp (bool, optional): Interpolation setting used by fast_mode.
+                Defaults to True.
+            fast_flow_threshold (float, optional): Flow QC threshold used by
+                fast_mode. Set to 0 for a faster, less default-like output.
+                Defaults to 0.4.
 
         Returns:
             A tuple containing (masks, flows, styles, diams): 
@@ -440,6 +454,17 @@ class CellposeModel():
             styles (list of 1D arrays of length 256 or single 1D array): Style vector summarizing each image, also used to estimate size of objects in image.
             
         """
+        if fast_mode:
+            if do_3D:
+                models_logger.warning("fast_mode is optimized for 2D inference; applying only compatible settings")
+            if diameter is None and rescale is None:
+                diameter = self.diam_mean if fast_diameter is None else fast_diameter
+            resample = False
+            interp = fast_interp
+            flow_threshold = fast_flow_threshold
+            if niter is None or niter == 0:
+                niter = fast_niter
+
         if isinstance(x, list) or x.squeeze().ndim == 5:
             self.timing = []
             masks, styles, flows = [], [], []
@@ -467,7 +492,7 @@ class CellposeModel():
                     cellprob_threshold=cellprob_threshold, compute_masks=compute_masks,
                     min_size=min_size, max_size_fraction=max_size_fraction, 
                     stitch_threshold=stitch_threshold, flow3D_smooth=flow3D_smooth,
-                    progress=progress, niter=niter)
+                    progress=progress, niter=niter, fast_mode=False)
                 masks.append(maski)
                 flows.append(flowi)
                 styles.append(stylei)
